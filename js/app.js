@@ -12,9 +12,11 @@ $('.cc-option').prop('selected', true); // Credit card payment option selected b
 const $name = $('#name').focus(); // Set focus on the first text field
 
 // Job Role Section
+const $jobRoleMenu = $('#title');
 const $otherTitle = $('#other-title').addClass('is-hidden');
 
 // T-Shirt Info Section
+const $designMenu = $('#design');
 const $colorOptions = $('#color option');
 const $tShirtColorsDiv = $('#colors-js-puns').hide(); //Color menu hidden until T-Shirt design selected
 
@@ -28,8 +30,8 @@ $total = $('#total').hide();
 let total = 0; // keeps track of total cost of registered activities
 
 // Payment Info section
-$payment = $('#payment');
-$creditCard = $('#credit-card');
+$paymentMenu = $('#payment');
+$ccSection = $('#credit-card');
 $paypal = $('.paypal').hide();
 $bitcoin = $('.bitcoin').hide();
 
@@ -37,6 +39,7 @@ $bitcoin = $('.bitcoin').hide();
                         FUNCTIONS
 ===============-=============-=============-===========*/
 
+// Job Role Section
 function toggleJobRole() {
   if(this.value === 'other') {
     $otherTitle.removeClass('is-hidden');
@@ -104,15 +107,15 @@ function computeActivitesCost(input) {
 // Payment Info section
 function displayPaymentSection() {
   if(this.value === 'paypal') {
-    $creditCard.hide();
+    $ccSection.hide();
     $paypal.show();
     $bitcoin.hide();
   } else if(this.value === 'bitcoin') {
-      $creditCard.hide();
+      $ccSection.hide();
       $paypal.hide();
       $bitcoin.show();
   } else {
-      $creditCard.show();
+      $ccSection.show();
       $paypal.hide();
       $bitcoin.hide();
   }
@@ -123,10 +126,10 @@ function displayPaymentSection() {
 ===============-=============-=============-===========*/
 
 // Job Role Section
-$('#title').on('change', toggleJobRole);
+$jobRoleMenu.on('change', toggleJobRole);
 
 // T-Shirt Info Section
-$('#design').on('change', displayColorOptions);
+$designMenu.on('change', displayColorOptions);
 
 // Register for Activities Section
 $activitiesInputs.on('change', event => {
@@ -143,4 +146,4 @@ $activitiesInputs.on('change', event => {
 });
 
 // Payment Info section
-$('#payment').on('change', displayPaymentSection);
+$paymentMenu.on('change', displayPaymentSection);
