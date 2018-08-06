@@ -1,6 +1,7 @@
 /*=============-=============-=============-=============
                     UNOBTRUSIVE JAVASCRIPT
 ===============-=============-=============-===========*/
+$('.activities').append('<p id="total"></p>');
 
 /*=============-=============-=============-=============
                       CACHED VARIABLES
@@ -21,6 +22,8 @@ $express = $('.activities input[name="express"]');
 $jsFramework = $('.activities input[name="js-frameworks"]');
 $jsLibs = $('.activities input[name="js-libs"]');
 $node = $('.activities input[name="node"]');
+$total = $('#total').hide();
+let total = 0; // keeps track of total cost of registered activities
 
 /*=============-=============-=============-=============
                         FUNCTIONS
@@ -81,6 +84,21 @@ $('#design').on('change', function() {
 
 // Register for Activities Section
 $activitiesInputs.on('change', function() {
+  const regex = /\$(\d+)$/; // Regex looks at the end of the line for any numbers preceded by a dollar sign
+  const amount = parseInt($(this).parent().text().match(regex)[1]); // grabs cost of activity from activities label
+  $total.show();
+
+  // compute and display total amount for checked workshops
+  if($(this).prop('checked')) {
+    total += amount;
+    $total.text(`Total: $${total}`);
+    if (total === 0) $total.hide();
+  } else {
+      total -= amount;
+      $total.text(`Total: $${total}`);
+      if (total === 0) $total.hide();
+  }
+
   // avoid scheduling conflicts
   if(this.name === 'js-frameworks') avoidSchedulingConflicts($jsFramework, $express);
   if(this.name === 'express') avoidSchedulingConflicts($express, $jsFramework);
