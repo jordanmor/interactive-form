@@ -37,39 +37,16 @@ $bitcoin = $('.bitcoin').hide();
                         FUNCTIONS
 ===============-=============-=============-===========*/
 
-// Register for Activities Section
-function avoidSchedulingConflicts(workshop, conflictingWorkshop) {
-  if(workshop.prop('checked')) {
-      conflictingWorkshop
-        .prop('disabled', true)
-        .parent()
-        .append('<span class="unavailable">&nbsp;&nbsp;Unavailable</span>')
-        .css('color', '#cbcbcb');
-  } else {
-      conflictingWorkshop
-        .prop('disabled', false)
-        .parent()
-        .css('color', '#000')
-        .children('.unavailable')
-        .remove();
-  }
-}
-
-/*=============-=============-=============-=============
-                    EVENT LISTENERS
-===============-=============-=============-===========*/
-
-// Job Role Section
-$('#title').on('change', function() {
+function toggleJobRole() {
   if(this.value === 'other') {
     $otherTitle.removeClass('is-hidden');
   } else {
     $otherTitle.addClass('is-hidden');
   }
-});
+}
 
 // T-Shirt Info Section
-$('#design').on('change', function() {
+function displayColorOptions() {
   if(this.value === 'js puns') {
     $tShirtColorsDiv.show();
     $colorOptions
@@ -88,16 +65,32 @@ $('#design').on('change', function() {
   } else {
       $tShirtColorsDiv.hide(); //Color menu hidden if no theme selected
   }
-});
+}
 
 // Register for Activities Section
-$activitiesInputs.on('change', function() {
+function avoidSchedulingConflicts(workshop, conflictingWorkshop) {
+  if(workshop.prop('checked')) {
+      conflictingWorkshop
+        .prop('disabled', true)
+        .parent()
+        .append('<span class="unavailable">&nbsp;&nbsp;Unavailable</span>')
+        .css('color', '#cbcbcb');
+  } else {
+      conflictingWorkshop
+        .prop('disabled', false)
+        .parent()
+        .css('color', '#000')
+        .children('.unavailable')
+        .remove();
+  }
+}
+
+function computeActivitesCost(input) {
   const regex = /\$(\d+)$/; // Regex looks at the end of the line for any numbers preceded by a dollar sign
-  const amount = parseInt($(this).parent().text().match(regex)[1]); // grabs cost of activity from activities label
+  const amount = parseInt($(input).parent().text().match(regex)[1]); // grabs parsed cost of activity from activities label
   $total.show();
 
-  // compute and display total amount for checked workshops
-  if($(this).prop('checked')) {
+  if(input.checked) {
     total += amount;
     $total.text(`Total: $${total}`);
     if (total === 0) $total.hide();
@@ -106,20 +99,14 @@ $activitiesInputs.on('change', function() {
       $total.text(`Total: $${total}`);
       if (total === 0) $total.hide();
   }
-
-  // avoid scheduling conflicts
-  if(this.name === 'js-frameworks') avoidSchedulingConflicts($jsFramework, $express);
-  if(this.name === 'express') avoidSchedulingConflicts($express, $jsFramework);
-  if(this.name === 'js-libs') avoidSchedulingConflicts($jsLibs, $node);
-  if(this.name === 'node') avoidSchedulingConflicts($node, $jsLibs);
-});
+}
 
 // Payment Info section
-$('#payment').on('change', function() {
+function displayPaymentSection() {
   if(this.value === 'paypal') {
-      $creditCard.hide();
-      $paypal.show();
-      $bitcoin.hide();
+    $creditCard.hide();
+    $paypal.show();
+    $bitcoin.hide();
   } else if(this.value === 'bitcoin') {
       $creditCard.hide();
       $paypal.hide();
@@ -129,4 +116,31 @@ $('#payment').on('change', function() {
       $paypal.hide();
       $bitcoin.hide();
   }
+}
+
+/*=============-=============-=============-=============
+                    EVENT LISTENERS
+===============-=============-=============-===========*/
+
+// Job Role Section
+$('#title').on('change', toggleJobRole);
+
+// T-Shirt Info Section
+$('#design').on('change', displayColorOptions);
+
+// Register for Activities Section
+$activitiesInputs.on('change', event => {
+  const selectedInput = event.target;
+
+  // Compute and display total amount for checked workshops
+  computeActivitesCost(selectedInput);
+
+  // avoid scheduling conflicts
+  if(selectedInput.name === 'js-frameworks') avoidSchedulingConflicts($jsFramework, $express);
+  if(selectedInput.name === 'express') avoidSchedulingConflicts($express, $jsFramework);
+  if(selectedInput.name === 'js-libs') avoidSchedulingConflicts($jsLibs, $node);
+  if(selectedInput.name === 'node') avoidSchedulingConflicts($node, $jsLibs);
 });
+
+// Payment Info section
+$('#payment').on('change', displayPaymentSection);
