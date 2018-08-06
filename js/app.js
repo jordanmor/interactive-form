@@ -2,6 +2,8 @@
                     UNOBTRUSIVE JAVASCRIPT
 ===============-=============-=============-===========*/
 $('.activities').append('<p id="total"></p>');
+$('.select-method').prop('disabled', true); // Select Payment Method option disabled
+$('.cc-option').prop('selected', true); // Credit card payment option selected by default
 
 /*=============-=============-=============-=============
                       CACHED VARIABLES
@@ -24,6 +26,12 @@ $jsLibs = $('.activities input[name="js-libs"]');
 $node = $('.activities input[name="node"]');
 $total = $('#total').hide();
 let total = 0; // keeps track of total cost of registered activities
+
+// Payment Info section
+$payment = $('#payment');
+$creditCard = $('#credit-card');
+$paypal = $('.paypal').hide();
+$bitcoin = $('.bitcoin').hide();
 
 /*=============-=============-=============-=============
                         FUNCTIONS
@@ -104,4 +112,21 @@ $activitiesInputs.on('change', function() {
   if(this.name === 'express') avoidSchedulingConflicts($express, $jsFramework);
   if(this.name === 'js-libs') avoidSchedulingConflicts($jsLibs, $node);
   if(this.name === 'node') avoidSchedulingConflicts($node, $jsLibs);
+});
+
+// Payment Info section
+$('#payment').on('change', function() {
+  if(this.value === 'paypal') {
+      $creditCard.hide();
+      $paypal.show();
+      $bitcoin.hide();
+  } else if(this.value === 'bitcoin') {
+      $creditCard.hide();
+      $paypal.hide();
+      $bitcoin.show();
+  } else {
+      $creditCard.show();
+      $paypal.hide();
+      $bitcoin.hide();
+  }
 });
