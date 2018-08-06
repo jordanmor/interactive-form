@@ -135,6 +135,11 @@ button:hover {
 	margin-top: 1.25em;
 }
 
+.unavailable {
+  color: red;
+  font-weight: bold;
+}
+
 /* ================================= 
   Helper Classes
 ==================================== */
