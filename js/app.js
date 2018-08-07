@@ -17,7 +17,7 @@ $('.cc-info').after(`<div class="col-12 col">
                      </div>`);
 $('.activities legend').append('<span class="error-message">- Please choose at least one activity -</span>');
 $('.exp-year-label').hide();
-// $('.error-message').hide();
+$('.error-message').hide();
 
 /*=============-=============-=============-=============
                       CACHED VARIABLES
@@ -35,20 +35,23 @@ const $colorOptions = $('#color option');
 const $tShirtColorsDiv = $('#colors-js-puns').hide(); //Color menu hidden until T-Shirt design selected
 
 // Register for Activities Section
-$activitiesInputs = $('.activities input');
-$express = $('.activities input[name="express"]');
-$jsFramework = $('.activities input[name="js-frameworks"]');
-$jsLibs = $('.activities input[name="js-libs"]');
-$node = $('.activities input[name="node"]');
-$total = $('#total').hide();
+const $activitiesInputs = $('.activities input');
+const $express = $('.activities input[name="express"]');
+const $jsFramework = $('.activities input[name="js-frameworks"]');
+const $jsLibs = $('.activities input[name="js-libs"]');
+const $node = $('.activities input[name="node"]');
+const $total = $('#total').hide();
 let total = 0; // keeps track of total cost of registered activities
 
 // Payment Info section
-$paymentMenu = $('#payment');
-$ccSection = $('#credit-card');
-$paypal = $('.paypal').hide();
-$bitcoin = $('.bitcoin').hide();
+const $paymentMenu = $('#payment');
+const $ccSection = $('#credit-card');
+const $paypal = $('.paypal').hide();
+const $bitcoin = $('.bitcoin').hide();
 
+// Form validation
+const $inputs = $('input[type=text], input[type=email]');
+const $form = $('form');
 /*=============-=============-=============-=============
                         FUNCTIONS
 ===============-=============-=============-===========*/
