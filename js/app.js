@@ -5,6 +5,20 @@ $('.activities').append('<p id="total"></p>');
 $('.select-method').prop('disabled', true); // Select Payment Method option disabled
 $('.cc-option').prop('selected', true); // Credit card payment option selected by default
 
+// Form validation messages
+$('form').prepend('<p class="error-message">Please enter all required fields</p>');
+$('#name').after('<p class="error-message">Please enter a name</p>');
+$('#mail').after('<p class="error-message">Please enter an email</p>');
+$('#other-title').after('<p class="error-message other-job">Please enter a job role</p>');
+$('.cc-info').after(`<div class="col-12 col">
+                        <p class="error-message">Please enter a valid credit card number</p>
+                        <p class="error-message">Please enter a valid zip code</p>
+                        <p class="error-message">Please enter a valid cvv code</p>
+                     </div>`);
+$('.activities legend').append('<span class="error-message">- Please choose at least one activity -</span>');
+$('.exp-year-label').hide();
+// $('.error-message').hide();
+
 /*=============-=============-=============-=============
                       CACHED VARIABLES
 ===============-=============-=============-===========*/

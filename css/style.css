@@ -140,6 +140,26 @@ button:hover {
   font-weight: bold;
 }
 
+.error-message {
+	color: #ff0000;
+	font-weight: bold;
+	margin: -5px 0 15px;
+	padding: 6px;
+	display: inline-block;
+	background-color: #c1deeb;
+	border-radius: 4px;
+}
+
+.form.error-message {
+	display: block;
+	font-size: 1.2rem;
+	background: none;
+	margin: 10px 0 0;
+	padding: 0;
+	display: block;
+	border-radius: 0;
+}
+
 /* ================================= 
   Helper Classes
 ==================================== */
