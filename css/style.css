@@ -135,9 +135,27 @@ button:hover {
 	margin-top: 1.25em;
 }
 
+.exp-date {
+	display: inline-block;
+	width: 100%;
+}
+
 .unavailable {
   color: red;
   font-weight: bold;
+}
+
+/* ================================= 
+  Error & Validation Classes
+==================================== */
+.error,
+.error:focus {
+	border: 3px solid #ff0000;
+}
+
+.valid,
+.valid:focus {
+	border: 3px solid green;
 }
 
 .error-message {
@@ -150,7 +168,7 @@ button:hover {
 	border-radius: 4px;
 }
 
-.form.error-message {
+.form-error {
 	display: block;
 	font-size: 1.2rem;
 	background: none;
@@ -158,6 +176,15 @@ button:hover {
 	padding: 0;
 	display: block;
 	border-radius: 0;
+}
+
+.activities-error {
+	font-size: 1rem;
+	margin-left: 1.5rem;
+	background: none;
+	padding: 0;
+	position: relative;
+	bottom: 1px;
 }
 
 /* ================================= 
