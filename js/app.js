@@ -57,7 +57,8 @@ const $form = $('form');
                         FUNCTIONS
 ===============-=============-=============-===========*/
 
-// Job Role Section
+// ---- Job Role Section ---- //
+
 function toggleJobRole() {
   if(this.value === 'other') {
     $otherTitle.removeClass('is-hidden');
@@ -67,7 +68,8 @@ function toggleJobRole() {
   }
 }
 
-// T-Shirt Info Section
+// ---- T-Shirt Info Section ---- //
+
 function displayColorOptions() {
   if(this.value === 'js puns') {
     $tShirtColorsDiv.show();
@@ -89,7 +91,8 @@ function displayColorOptions() {
   }
 }
 
-// Register for Activities Section
+// ---- Register for Activities Section ---- //
+
 function avoidSchedulingConflicts(workshop, conflictingWorkshop) {
   if(workshop.prop('checked')) {
       conflictingWorkshop
@@ -123,7 +126,8 @@ function computeActivitesCost(input) {
   }
 }
 
-// Payment Info section
+// ---- Payment Info section ---- //
+
 function displayPaymentSection() {
   if (this.value !== 'credit card') {
     // When CC option is not selected, remove all CC inputs 'error' & 'valid' classes
@@ -149,7 +153,8 @@ function displayPaymentSection() {
   }
 }
 
-// Form validation Section
+// ---- Form validation Section ---- //
+
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
@@ -248,9 +253,7 @@ function validateForm(event) {
 
   // When total valid inputs = total inputs & at least one activity is registered, form can be submitted
   if(validInputs === inputs && activityRegistered()) {
-    event.preventDefault(); 
-    console.log('submitted');
-    // return;
+    return;
   } else {
       // Otherwise, form submission is blocked. Form, activity field and all invalid inputs show error messages
       event.preventDefault();
@@ -264,7 +267,8 @@ function validateForm(event) {
           // Do not include CC inputs if CC option not selected from Payment Info menu
           return $paymentMenu.val() !== 'credit card' ? false : input.className !== 'valid';
         } else if(id === 'other-title') {
-            return input.className !== 'is-hidden'; // Do not include job role input if option is not selected
+            // Do not include job role input if option is not selected or has class 'valid'
+            return input.className !== 'is-hidden' && input.className !== 'valid';
         } else {
           return input.className !== 'valid';
         }
@@ -306,6 +310,6 @@ $activitiesInputs.on('change', event => {
 // Payment Info section
 $paymentMenu.on('change', displayPaymentSection);
 
-// Form validation Section
+// Form Validation Section
 $inputs.on('keyup blur', validateInput);
 $form.on('submit', validateForm);
