@@ -70,6 +70,12 @@ legend {
 	width: 100%;
 }
 
+input[type="text"],
+input[type="email"],
+button {
+  border-radius: 4px;
+}
+
 label {
 	color: #000;
 	display: block;
@@ -79,15 +85,19 @@ label {
 input,
 select {
 	margin-bottom: 1.125em;	
-}
-
-input {
-	font-size: 1em;
-	font-weight: 500;
-	padding: .8em;
 	background: #c1deeb;
 	border: 2px solid #c1deeb;
 	outline: none;
+	font-weight: 500;
+	font-size: 1em;
+}
+
+select {
+	height: 45px;
+}
+
+input {
+	padding: .8em;
 }
 
 input:focus {
