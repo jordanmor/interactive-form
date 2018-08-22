@@ -160,7 +160,7 @@ button:hover {
 ==================================== */
 .error,
 .error:focus {
-	border: 3px solid #ff0000;
+	color: #c0392b;
 }
 
 .valid,
@@ -168,8 +168,16 @@ button:hover {
 	border: 3px solid green;
 }
 
+.error-bd {
+	border: 3px solid #c0392b;
+}
+
+.error span {
+  margin-left: .25rem;
+}
+
 .error-message {
-	color: #ff0000;
+	color: #c0392b;
 	font-weight: bold;
 	margin: -5px 0 15px;
 	padding: 6px;
