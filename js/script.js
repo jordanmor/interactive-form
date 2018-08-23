@@ -149,12 +149,12 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-// This function makes sure that at least one activity is registered
+// Makes sure at least one activity is registered
 function activityRegistered() {
   return $('.activities input:checked').length > 0; // No checked activites returns false, otherwise true;
 }
 
-// Simple validation for purposes of project
+// Simple CC validation for purposes of project
 function validateCC(id, value) {
   if (id === 'cc-num') {
       return /^\d{13,16}$/.test(value); // 13 - 16 numbers only for cc
@@ -165,21 +165,16 @@ function validateCC(id, value) {
   }
 }
 
-// Adds a class of 'error' to highlight input & display's corresponding error message
 function showError(el, message) {
-  // const $label = $(el).prev('label');
   if(!$(el).hasClass('error-bd')) {
     $(el).removeClass('valid').addClass('error-bd').prev('label').addClass('error').append(message);
   }
 }
 
-// Removes 'error' class from input and hides error message
 function hideError(el) {
   $(el).removeClass('error-bd').prev('label').removeClass('error').find('span').remove('span');
-  // $(`.${id}-error`).hide();
 }
 
-// Adds a class of valid that highlights input and hides error message and class
 function addValidClass(el) {
   hideError(el);
   $(el).addClass('valid');
@@ -313,7 +308,7 @@ $activitiesInputs.on('change', event => {
   // Compute and display total amount for checked workshops
   computeActivitesCost(selectedInput);
 
-  // avoid scheduling conflicts
+  // Avoid scheduling conflicts
   if(selectedInput.name === 'js-frameworks') avoidSchedulingConflicts($jsFramework, $express);
   if(selectedInput.name === 'express') avoidSchedulingConflicts($express, $jsFramework);
   if(selectedInput.name === 'js-libs') avoidSchedulingConflicts($jsLibs, $node);
